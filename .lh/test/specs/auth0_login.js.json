@@ -1,0 +1,18 @@
+{
+    "sourceFile": "test/specs/auth0_login.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1763033409734,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1763033409734,
+            "name": "Commit-0",
+            "content": "describe('Auth0 Login Test', () => {\r\n    it('should enter email and password in Auth0 login', async () => {\r\n        // Switch to webview context if not already done\r\n        const contexts = await driver.getContexts();\r\n        const webviewContext = contexts.find(c => c.includes('WEBVIEW'));\r\n        if (webviewContext) {\r\n            await driver.switchContext(webviewContext);\r\n        }\r\n\r\n        // Enter email\r\n        const emailField = await $('//input[@type=\"email\"]');\r\n        await emailField.waitForDisplayed({ timeout: 5000 });\r\n        await emailField.setValue('nisitha.prakash@avid.com');\r\n\r\n        // Enter password\r\n        const passwordField = await $('//input[@type=\"password\"]');\r\n        await passwordField.waitForDisplayed({ timeout: 5000 });\r\n        await passwordField.setValue('S3cretPa$$');\r\n    });\r\n});"
+        }
+    ]
+}

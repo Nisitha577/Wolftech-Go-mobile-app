@@ -6,29 +6,32 @@ exports.config = {
     path: '/',
 
     specs: [
-     './test/specs/first_test.js'
+        './test/specs/scan_now_webview.js'
     ],
 
     maxInstances: 1,
 
     capabilities: [{
         platformName: 'Android',
-        'appium:deviceName': 'emulator-5554',   // From adb devices
-        'appium:platformVersion': '13',         // Optional: adjust if needed
+        'appium:deviceName': 'RFCT90L4K1W',   // From adb devices
+        'appium:platformVersion': '13',       // Optional: adjust if needed
         'appium:automationName': 'UiAutomator2',
-        'appium:appPackage': 'io.appium.android.apis',
-        'appium:appActivity': '.ApiDemos',
-        //'appium:browserName': 'Chrome',
+        'appium:appPackage': 'no.wolftech.news',
+        'appium:appActivity': '.MainActivity',
+        // 'appium:browserName': 'Chrome',
         'appium:noReset': false,
+        'appium:fullReset': true,
         'appium:autoGrantPermissions': true,
         'appium:adbExecTimeout': 60000,
+        'appium:app': 'C:\\Users\\nisit\\Downloads\\app-debug.apk',
 
         // Chrome/WebView options
         'goog:chromeOptions': {
             prefs: {
-                 'profile.default_content_setting_values.notifications': 2
+                'profile.default_content_setting_values.notifications': 2
             }
-        }}],
+        }
+    }],
 
     logLevel: 'info',
     bail: 0,

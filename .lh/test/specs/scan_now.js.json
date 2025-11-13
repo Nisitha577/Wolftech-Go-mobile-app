@@ -1,0 +1,22 @@
+{
+    "sourceFile": "test/specs/scan_now.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 1,
+            "patches": [
+                {
+                    "date": 1763029866063,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1763030821828,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,24 @@\n-describe('Scan Now Button Test', () => {\r\n-    it('should find and click the SCAN NOW button', async () => {\r\n-        // Use UiSelector to find the button by text\r\n+describe('Scan Now and Auth0 WebView Test', () => {\r\n+    it('should click SCAN NOW, switch to webview, and click Auth0', async () => {\r\n+        // Click the SCAN NOW button\r\n         const scanNowButton = await $('android=new UiSelector().text(\"SCAN NOW\")');\r\n         await scanNowButton.click();\r\n-        // Optionally, add an assertion or next step here\r\n-        // Example: await expect(scanNowButton).toBeDisplayed();\r\n+\r\n+        // Wait for the next page/webview to load\r\n+        await driver.pause(3000);\r\n+\r\n+        // Get all contexts (NATIVE_APP, WEBVIEW, etc.)\r\n+        const contexts = await driver.getContexts();\r\n+        // Switch to the webview context\r\n+        const webviewContext = contexts.find(c => c.includes('WEBVIEW'));\r\n+        if (webviewContext) {\r\n+            await driver.switchContext(webviewContext);\r\n+\r\n+            // Click the Auth0 button in the webview\r\n+            const auth0Button = await $(\"//*[text()='Auth0']\");\r\n+            await auth0Button.click();\r\n+        } else {\r\n+            throw new Error('WEBVIEW context not found');\r\n+        }\r\n     });\r\n-});\r\n+});\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1763029866063,
+            "name": "Commit-0",
+            "content": "describe('Scan Now Button Test', () => {\r\n    it('should find and click the SCAN NOW button', async () => {\r\n        // Use UiSelector to find the button by text\r\n        const scanNowButton = await $('android=new UiSelector().text(\"SCAN NOW\")');\r\n        await scanNowButton.click();\r\n        // Optionally, add an assertion or next step here\r\n        // Example: await expect(scanNowButton).toBeDisplayed();\r\n    });\r\n});\r\n"
+        }
+    ]
+}
