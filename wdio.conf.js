@@ -23,7 +23,7 @@ exports.config = {
         'appium:fullReset': true,
         'appium:autoGrantPermissions': true,
         'appium:adbExecTimeout': 60000,
-        'appium:app': 'C:\\Users\\nisit\\Downloads\\app-debug.apk',
+        'appium:app': "C:\\Users\\nisit\\Downloads\\tempapk\\app-debug.apk",
 
         // Chrome/WebView options
         'goog:chromeOptions': {
