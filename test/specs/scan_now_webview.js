@@ -5,37 +5,29 @@ describe('Scan Now + Auth0 Login Flow', () => {
         const scanNowBtn = await $('android=new UiSelector().text("SCAN NOW")');
         await scanNowBtn.click();
 
-        // Wait for app to transition
+        // wait for page transition
         await driver.pause(4000);
 
-        // 2. Check contexts
+        // 2. Get contexts (just for debug)
         const contexts = await driver.getContexts();
-        const webview = contexts.find(c => c.includes('WEBVIEW'));
+        console.log('Contexts:', contexts);
 
-        // ❗ If NO WEBVIEW is found → Already logged in
-        if (!webview) {
-            console.log("\x1b[36m[TEST]\x1b[0m No WebView detected — app skipped login and landed directly inside the app.");
-            return; // End test early
+        // 3. Click Auth0 button (native element)
+        try {
+            const auth0Btn = await $('//*[@text="Auth0"]');
+            await auth0Btn.waitForDisplayed({ timeout: 8000 });
+            await auth0Btn.click();
+            console.log("[TEST] Clicked Auth0 button");
+        } catch (err) {
+
+            console.log("[TEST] Auth0 button not found, maybe already logged in.");
         }
 
-        // 3. Switch to WebView
-        await driver.switchContext(webview);
-        await driver.pause(1000);
-
-        // 4. Try clicking Auth0 button (if visible)
+        // 4. If HTML login form appears (email/password), fill it
         try {
-            const authBtn = await $('//*[contains(text(),"Auth0")]');
-            if (await authBtn.isDisplayed()) {
-                await authBtn.click();
-            }
-        } catch (_) {
-            console.log("\x1b[36m[TEST]\x1b[0m Auth0 button not visible — likely already logged in.");
-        }
-
-        // 5. If login form appears, fill credentials
-        try {
+            // these ONLY appear if login is NOT cached
             const username = await $('#username');
-            await username.waitForDisplayed({ timeout: 5000 });
+            await username.waitForDisplayed({ timeout: 6000 });
 
             await username.setValue('nisitha.prakash@avid.com');
             const password = await $('#password');
@@ -44,9 +36,9 @@ describe('Scan Now + Auth0 Login Flow', () => {
             const continueBtn = await $('//button[contains(text(),"Continue")]');
             await continueBtn.click();
 
-        } catch (e) {
-            console.log("\x1b[36m[TEST]\x1b[0m Login screen did not appear — continuing.");
+            console.log("[TEST] Filled login form");
+        } catch {
+            console.log("[TEST] No login form appeared; likely auto-login / SSO.");
         }
-
     });
 });
