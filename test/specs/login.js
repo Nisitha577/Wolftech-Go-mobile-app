@@ -5,9 +5,9 @@ describe('Scan Now + Auth0 Login Flow', () => {
         await scanNowBtn.click();
 
         // wait for page transition
-        await driver.pause(4000);
+        //await driver.pause(4000);
 
-        // 2. Get contexts (just for debug)
+        // 2. Get contexts 
         const contexts = await driver.getContexts();
         console.log('Contexts:', contexts);
 
@@ -36,7 +36,7 @@ describe('Scan Now + Auth0 Login Flow', () => {
 
             console.log("[TEST] Filled login form");
         } catch {
-            console.log("[TEST] No login form appeared; likely auto-login / SSO.");
+            console.log("[TEST] No login form appeared; likely auto-login .");
         }
 
         // 5. After login, click user icon and then logout

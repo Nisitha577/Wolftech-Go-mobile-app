@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "test": "wdio run wdio.conf.js",
-    "login": "wdio run wdio.conf.js --spec test/specs/testspec.js",
-    "scan": "wdio run wdio.conf.js --spec test/specs/scan_now.js"
+    "login": "wdio run wdio.conf.js --spec test/specs/login.js"
+    
   },
   "keywords": [],
   "author": "",

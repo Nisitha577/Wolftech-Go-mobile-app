@@ -6,7 +6,7 @@ exports.config = {
     path: '/',
 
     specs: [
-        './test/specs/scan_now_webview.js'
+        './test/specs/login.js'
     ],
 
     maxInstances: 1,
